@@ -1,6 +1,6 @@
 {
     // https://nuxt.com/docs/guide/concepts/typescript
-    "extends": "./.nuxt/tsconfig.json"
+    "extends": "./.nuxt/tsconfig.json",
     //* if you've got any errors related to ref while using typescript this line may help resolving the issue
-    // "include": ["env.d.ts", ".nuxt/nuxt.d.ts", "**/*"]
+    "include": ["env.d.ts", ".nuxt/nuxt.d.ts", "**/*"]
 }
