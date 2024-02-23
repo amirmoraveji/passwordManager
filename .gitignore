@@ -1,4 +1,4 @@
-#* front end files and folder that should be ignored
+#* frontend end files and folder that should be ignored
 /front/.output
 /front/.data
 /front/.nuxt
@@ -22,3 +22,7 @@
 /front/.env
 /front/.env.*
 /front/!.env.example
+
+
+#* backend end files and folder that should be ignored
+/back/node_modules
