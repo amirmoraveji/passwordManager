@@ -1,24 +1,24 @@
-# Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
-dist
+#* front end files and folder that should be ignored
+/front/.output
+/front/.data
+/front/.nuxt
+/front/.nitro
+/front/.cache
+/front/dist
 
 # Node dependencies
-node_modules
+/front/node_modules
 
 # Logs
-logs
-*.log
+/front/logs
+/front/*.log
 
 # Misc
-.DS_Store
-.fleet
-.idea
+/front/.DS_Store
+/front/.fleet
+/front/.idea
 
 # Local env files
-.env
-.env.*
-!.env.example
+/front/.env
+/front/.env.*
+/front/!.env.example
