@@ -1,8 +1,4 @@
-<script lang="ts" setup>
-const info = ref("Hello world")
-</script>
-<template>
-    <h1>1</h1>
-</template>
+<script lang="ts" setup></script>
+<template></template>
 
 <style></style>

@@ -1,16 +1,20 @@
 <template>
     <div class="flex flex-col justify-between min-h-screen">
-        <header class="dark:text-white flex justify-between p-2">
+        <header class="dark:text-white flex justify-between p-2 z-10">
             <div class="space-x-4">
-                <span class="hover:text-green-500 cursor-pointer transition-colors duration-200">Home</span>
-                <span class="hover:text-green-500 cursor-pointer transition-colors duration-200">About</span>
-                <span class="hover:text-green-500 cursor-pointer transition-colors duration-200">Blog</span>
-                <span class="hover:text-green-500 cursor-pointer transition-colors duration-200">Shop</span>
+                <NuxtLink to="/home">Home</NuxtLink>
+                <NuxtLink to="/home">About</NuxtLink>
+                <NuxtLink to="/home">Shop</NuxtLink>
+                <NuxtLink to="/home">Search</NuxtLink>
             </div>
             <div class="space-x-4">
-                <button class="dark:text-white transition-colors duration-200" @click="setColorTheme(useColorMode().preference == 'dark' ? 'light' : 'dark')">
-                    {{ useColorMode().preference == "dark" ? "light" : "dark" }}
-                </button>
+                <ClientOnly>
+                    <button
+                        class="dark:text-white transition-colors duration-200"
+                        @click="useColorMode().preference == 'dark' ? (useColorMode().preference = 'light') : (useColorMode().preference = 'dark')">
+                        {{ useColorMode().preference }}
+                    </button>
+                </ClientOnly>
             </div>
         </header>
         <main>
