@@ -1,4 +1,6 @@
 <script lang="ts" setup></script>
-<template></template>
+<template>
+    <PasswordGenerator />
+</template>
 
 <style></style>

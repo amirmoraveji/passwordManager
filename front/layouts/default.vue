@@ -1,11 +1,14 @@
 <template>
-    <div class="flex flex-col justify-between min-h-screen">
-        <header class="dark:text-white flex justify-between p-2 z-10">
+    <div class="flex flex-col h-screen w-full bg-gray-100 dark:bg-[#070707] transition-colors duration-200">
+        <header class="dark:text-white flex justify-between p-2">
             <div class="space-x-4">
-                <NuxtLink to="/home">Home</NuxtLink>
-                <NuxtLink to="/home">About</NuxtLink>
+                <NuxtLink to="/">Home</NuxtLink>
+                <NuxtLink to="/">Home</NuxtLink>
+                <NuxtLink to="/">Home</NuxtLink>
+                <NuxtLink to="/">Home</NuxtLink>
+                <!-- <NuxtLink to="/xyz">About</NuxtLink>
                 <NuxtLink to="/home">Shop</NuxtLink>
-                <NuxtLink to="/home">Search</NuxtLink>
+                <NuxtLink to="/home">Search</NuxtLink> -->
             </div>
             <div class="space-x-4">
                 <ClientOnly>
@@ -62,4 +65,8 @@
 
 <script lang="ts" setup></script>
 
-<style></style>
+<style>
+header {
+    z-index: 100;
+}
+</style>
