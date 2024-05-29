@@ -7,18 +7,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// const db = client.db("PasswordManager")
 import { model } from "mongoose";
-// import passwords from "../../model/mongodbTables/passwords.js"
-const getFromDB = (dbName) => __awaiter(void 0, void 0, void 0, function* () {
+const getFromDB = (tableName, tableSchema) => __awaiter(void 0, void 0, void 0, function* () {
     //  return await db.collection(dbName).find().toArray()
-    return { name: "amir" };
+    const items = yield model(tableName, tableSchema).find();
+    return items;
 });
 const setToDB = (data, tableName, tableSchema) => __awaiter(void 0, void 0, void 0, function* () {
     // return await db.collection(dbName).insertOne(data)
     //  console.log("Imported schema:", tableSchema)
     const final = model(tableName, tableSchema);
-    const result = yield final.create(data);
+    try {
+        yield final.create(data);
+    }
+    catch (error) {
+        return error;
+    }
 });
 export default {
     getFromDB,

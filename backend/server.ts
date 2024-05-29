@@ -4,6 +4,9 @@ import routes from "./routes/routes.js"
 import dotenv from "dotenv"
 import cors from "cors"
 import "./databases/mongoDB/mongoDbInits.js" //need this to establish the connection
+// import util from "util"
+// import mySqlInits from "./databases/mysql/mySQLInits.js"
+// util.promisify(mySqlInits.connection.query).bind(mySqlInits.connection)
 dotenv.config()
 const port = process.env.PORT
 const app = express()

@@ -140,7 +140,10 @@ const dBFetch = (tableName, sql, values) => __awaiter(void 0, void 0, void 0, fu
         return { success: false, error: "Multiple SQL statements are not allowed." };
     // Check if the SQL query string and values are not only present but also valid.
     if (!sql || typeof sql !== "string")
-        return { success: false, error: "Invalid input: SQL query or values are missing or incorrect." };
+        return {
+            success: false,
+            error: "Invalid input: SQL query or values are missing or incorrect.",
+        };
     const queryOptions = {
         sql: sql,
         values: values,
