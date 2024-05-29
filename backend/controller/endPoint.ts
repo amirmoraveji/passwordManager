@@ -1,9 +1,8 @@
 import { Request, Response, response } from "express"
-// import mySqlDB from "../databases/mysql/mysqlFunctions.js"
 import mongoDb from "../databases/mongoDB/mongoDbFunctions.js"
 import { PasswordFields, UsersFields } from "../types/type.js"
 import passwordsSchema from "../databases/mongoDB/schema/schema.js"
-// mySqlDB.getAll
+
 export default {
     getALlPasswords: async (req: Request, res: Response) => {
         const result = await mongoDb.getFromDB("passwords", passwordsSchema)

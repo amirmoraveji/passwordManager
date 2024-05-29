@@ -40,7 +40,10 @@ watch(tableInfoModal, () => {
 })
 // This will make the search folder happen by filtering based on filterFolder ref
 watch(filterFolder, () => {
-   if (tagSore.tags) tagSore.mainMenuTag = tagSore.tags.filter((obj) => obj.tagName.toLowerCase().includes(filterFolder.value.toLowerCase()))
+   if (tagSore.tags)
+      tagSore.mainMenuTag = tagSore.tags.filter((obj) =>
+         obj.tagName.toLowerCase().includes(filterFolder.value.toLowerCase())
+      )
 })
 const setActive = (menuName: menuNamesTypes): void => {
    for (let i = 0; i < menu.value[0].menus.length; i++) {
@@ -182,10 +185,14 @@ const saveEditRow = (id: string, currentText: string, recoverText: string) => {
    }
    if (tagSore.tags) {
       for (let i = 0; i < tagSore.tags.length; i++) {
-         if (tagSore.tags[i].tagNameRecover.toLowerCase().replace(/\s+/g, "") === currentText.toLowerCase().replace(/\s+/g, "")) {
+         if (
+            tagSore.tags[i].tagNameRecover.toLowerCase().replace(/\s+/g, "") ===
+            currentText.toLowerCase().replace(/\s+/g, "")
+         ) {
             if (
                tagSore.tags[i].id == id &&
-               tagSore.tags[i].tagNameRecover.toLowerCase().replace(/\s+/g, "") === currentText.toLowerCase().replace(/\s+/g, "")
+               tagSore.tags[i].tagNameRecover.toLowerCase().replace(/\s+/g, "") ===
+                  currentText.toLowerCase().replace(/\s+/g, "")
             ) {
                tagSore.tags[i].edit = false
                return
@@ -251,7 +258,9 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
    currentTagId.value = currentTagId.value === id ? null : id
    // this for will filter all password blocks by given tagName
    for (let i = 0; i < passwordStore.allPasswords.length; i++) {
-      passwordStore.allPasswordsBackup = [...passwordStore.allPasswords.filter((obj) => obj.tags?.includes(tagName))]
+      passwordStore.allPasswordsBackup = [
+         ...passwordStore.allPasswords.filter((obj) => obj.tags?.includes(tagName)),
+      ]
    }
    // if currentTagId is null it means user deselect the tag, therefore all filtered passwords should come back
    if (currentTagId.value == null) {
@@ -278,7 +287,8 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
       :draggable="false"
       header="Create New Tag"
       class="w-1/3"
-      :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+      :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+   >
       <Tag button-size="w-[30%] m-2" input-size="w-[70%]  h-9" />
    </Dialog>
    <!-- login type password -->
@@ -286,8 +296,9 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
       v-model:visible="globalStore.LoginTypeModal"
       modal
       :draggable="false"
-      class="w-full sm:w-[90%] md:w-[80%] lg:w-[700px]"
-      header="Create New Login Type Password">
+      class="w-full sm:w-[90%] md:w-[85%] lg:w-[750px]"
+      header="Create New Login Type Password"
+   >
       <div class="flex">
          <NewPassword class="border dark:border-gray-700 rounded-lg p-4" />
          <PasswordGenerator class="border ms-2 dark:border-gray-700 rounded-lg p-4" />
@@ -301,29 +312,37 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
          <!-- Top section -->
          <!-- Header -->
          <div class="text-center my-2">
-            <span class="text-2xl darkLight">Password <span class="text-primary-400 font-bold">Manager</span></span>
+            <span class="text-2xl darkLight"
+               >Password <span class="text-primary-400 font-bold">Manager</span></span
+            >
          </div>
          <!-- Body -->
          <div class="flex flex-col space-y-4">
             <!-- Tag Search -->
             <div>
-               <span class="px-4 text-primary-500 dark:text-primary-400 font-bold leading-none">Password Search</span>
+               <span class="px-4 text-primary-500 dark:text-primary-400 font-bold leading-none"
+                  >Password Search</span
+               >
                <div class="flex py-2 items-center justify-between px-4 smooth">
                   <span class="relative">
                      <MdiIcon
                         icon="mdiMagnify"
-                        class="absolute top-2/4 -mt-[10px] left-2 text-surface-400 dark:text-surface-600 !w-[22px] !h-[22px]" />
+                        class="absolute top-2/4 -mt-[10px] left-2 text-surface-400 dark:text-surface-600 !w-[22px] !h-[22px]"
+                     />
                      <InputText placeholder="Search" class="pl-8 w-[230px]" />
                   </span>
                   <!-- Options -->
                </div>
                <div v-for="chunk in menu" class="mt-4 px-3 flex flex-col darkLight">
-                  <span class="text-primary-500 dark:text-primary-400 font-bold leading-none">{{ chunk.title }}</span>
+                  <span class="text-primary-500 dark:text-primary-400 font-bold leading-none">{{
+                     chunk.title
+                  }}</span>
                   <div
                      v-for="item in chunk.menus"
                      @click="item.command"
                      :class="item.isActive ? 'active' : ''"
-                     class="flex justify-between mt-1 items-center p-1 rounded-md cursor-pointer defaultHover">
+                     class="flex justify-between mt-1 items-center p-1 rounded-md cursor-pointer defaultHover"
+                  >
                      <div class="flex">
                         <MdiIcon viewBox="0 0 24 24" :icon="item.icon" :class="item.class" />
                         <!-- <NuxtLink :to="item.link">{{ item.name }}</NuxtLink> -->
@@ -331,8 +350,11 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
                      </div>
                      <Badge
                         class="!bg-yellow-500 dark:bg-yellow-300"
-                        v-if="item.name == 'Duplicate Passwords' && passwordStore.duplicatePasswords.length >= 2"
-                        :value="passwordStore.duplicatePasswords.length"></Badge>
+                        v-if="
+                           item.name == 'Duplicate Passwords' && passwordStore.duplicatePasswords.length >= 2
+                        "
+                        :value="passwordStore.duplicatePasswords.length"
+                     ></Badge>
                   </div>
                </div>
             </div>
@@ -343,7 +365,8 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
                   <MdiIcon
                      @click="tagSore.tagModal = true"
                      icon="mdiPlusCircle"
-                     class="!h-[25px] !w-[23px] text-gray-400 hover:text-primary-400 cursor-pointer" />
+                     class="!h-[25px] !w-[23px] text-gray-400 hover:text-primary-400 cursor-pointer"
+                  />
                </div>
                <InputText v-model="filterFolder" class="w-56 mx-4 my-2" placeholder="Filter Tags by name" />
                <!-- tag wrapper -->
@@ -353,33 +376,42 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
                      class="mt-1 p-1 justify-between items-center rounded-md defaultHover flex"
                      :class="{ active: currentTagId == row.id }"
                      @mouseenter="enableEditIcon(row.id)"
-                     @mouseleave="disableEditIcon(row.id)">
+                     @mouseleave="disableEditIcon(row.id)"
+                  >
                      <div class="flex">
-                        <MdiIcon @click="filterPasswordsByTag(row.id, row.tagName)" icon="mdiTag" class="!h-[22px] !w-[22px]" />
+                        <MdiIcon
+                           @click="filterPasswordsByTag(row.id, row.tagName)"
+                           icon="mdiTag"
+                           class="!h-[22px] !w-[22px]"
+                        />
                         <span v-if="!row.edit" class="ms-2 max-w-44 overflow-auto">{{ row.tagName }}</span>
                         <InputText
                            v-else
                            @keyup="sendOrCancelByEnter($event, row.id, row.tagName, row.tagNameRecover)"
                            class="ms-2 w-[150px] h-7"
                            v-model.trim="row.tagName"
-                           placeholder="Type your tag name" />
+                           placeholder="Type your tag name"
+                        />
                      </div>
                      <div class="flex space-x-1">
                         <MdiIcon
                            @click="editRow(row.id)"
                            v-if="row.editIcon && !row.edit"
                            icon="mdiPen"
-                           class="!h-[21px] !w-[22px] me-1 text-yellow-500 cursor-pointer" />
+                           class="!h-[21px] !w-[22px] me-1 text-yellow-500 cursor-pointer"
+                        />
                         <MdiIcon
                            @click="saveEditRow(row.id, row.tagName, row.tagNameRecover)"
                            v-if="row.edit"
                            icon="mdiCheckCircle"
-                           class="!h-[23px] !w-[22px] text-green-500 hover:text-green-600 cursor-pointer" />
+                           class="!h-[23px] !w-[22px] text-green-500 hover:text-green-600 cursor-pointer"
+                        />
                         <MdiIcon
                            @click="cancelEditRow(row.id)"
                            v-if="row.edit"
                            icon="mdiCloseCircle"
-                           class="!h-[23px] !w-[22px] text-red-500 hover:text-red-600 cursor-pointer" />
+                           class="!h-[23px] !w-[22px] text-red-500 hover:text-red-600 cursor-pointer"
+                        />
                      </div>
                   </div>
                </div>

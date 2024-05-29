@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 const uri = `mongodb://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@mongodb/${process.env.MONGO_DB_NAME}?authSource=admin&retryWrites=true&w=majority`;
 mongoose.connect(uri);
 const db = mongoose.connection;

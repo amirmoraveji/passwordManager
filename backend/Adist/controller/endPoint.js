@@ -7,10 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// import mySqlDB from "../databases/mysql/mysqlFunctions.js"
 import mongoDb from "../databases/mongoDB/mongoDbFunctions.js";
 import passwordsSchema from "../databases/mongoDB/schema/schema.js";
-// mySqlDB.getAll
 export default {
     getALlPasswords: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield mongoDb.getFromDB("passwords", passwordsSchema);

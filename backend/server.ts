@@ -7,8 +7,10 @@ import "./databases/mongoDB/mongoDbInits.js" //need this to establish the connec
 // import util from "util"
 // import mySqlInits from "./databases/mysql/mySQLInits.js"
 // util.promisify(mySqlInits.connection.query).bind(mySqlInits.connection)
+
 dotenv.config()
 const port = process.env.PORT
+
 const app = express()
 app.use(cors())
 app.use(express.json())
