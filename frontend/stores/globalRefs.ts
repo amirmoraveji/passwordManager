@@ -2,5 +2,7 @@
 export const useGlobalRefStore = defineStore("globalRef", () => {
    // this variable will change both in mainMenu and newPassword component
    const LoginTypeModal = ref<true | false>(false)
-   return { LoginTypeModal }
+   const showMenu = ref<"flex fixed" | "hidden">("hidden")
+   const backgroundContent = ref<"visible" | "hidden">("visible")
+   return { LoginTypeModal, showMenu, backgroundContent }
 })

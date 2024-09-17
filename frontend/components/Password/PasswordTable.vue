@@ -13,10 +13,17 @@ const lastBlockId = ref<string>()
 const showTwoFAModal = ref<true | false>(false)
 const showEditModal = ref<true | false>(false)
 
+// global variables
+const globalStore = useGlobalRefStore()
+
 // vuePrime
 const toast = useToast()
 const confirm = useConfirm()
 
+const showAndHideContents = () => {
+   globalStore.backgroundContent = "hidden"
+   globalStore.showMenu = "flex fixed"
+}
 // passwordStore.allPasswords = data.value?.data
 // This will remove 2FA input when unchecked
 watch(checkStates.value, () => {
@@ -185,7 +192,7 @@ getPasswordsFromDB()
             v-model="passwordStore.updateInputs.description"
             :invalid="inputErrors?.description"
          />
-         <div class="grid grid-cols-2 gap-1">
+         <div class="grid grid-cols-2 gap-1 space-y-1">
             <!-- Username -->
             <div class="flex flex-col">
                <label>Username</label>
@@ -197,6 +204,7 @@ getPasswordsFromDB()
                />
             </div>
             <!-- Password -->
+            <!-- todo fix the password field position (it's a little bit lower the username) -->
             <div class="flex flex-col">
                <div class="flex items-center">
                   <label>Password</label>
@@ -210,7 +218,7 @@ getPasswordsFromDB()
             </div>
             <!-- second password -->
             <div class="flex flex-col">
-               <div class="flex items-center">
+               <div class="flex justify-between items-center">
                   <label
                      class="hover:text-primary-400 transition-colors duration-200 cursor-pointer"
                      for="secondPassword"
@@ -233,7 +241,7 @@ getPasswordsFromDB()
             </div>
             <!-- 2FA -->
             <div class="flex flex-col">
-               <div class="flex items-center">
+               <div class="flex justify-between items-center">
                   <label class="hover:text-primary-400 transition-colors duration-200 cursor-pointer" for="2FAPassword"
                      >2FA Secret</label
                   >
@@ -254,7 +262,7 @@ getPasswordsFromDB()
             </div>
             <!-- phone -->
             <div class="flex flex-col">
-               <div class="flex items-center">
+               <div class="flex justify-between items-center">
                   <label class="hover:text-primary-400 transition-colors duration-200 cursor-pointer" for="phone"
                      >Phone</label
                   >
@@ -275,7 +283,7 @@ getPasswordsFromDB()
             </div>
             <!-- email -->
             <div class="flex flex-col">
-               <div class="flex items-center">
+               <div class="flex justify-between items-center">
                   <label class="hover:text-primary-400 transition-colors duration-200 cursor-pointer" for="email"
                      >Email</label
                   >
@@ -309,7 +317,7 @@ getPasswordsFromDB()
             </div>
             <!-- website -->
             <div class="flex flex-col">
-               <div class="flex items-center">
+               <div class="flex justify-between items-center">
                   <label class="hover:text-primary-400 transition-colors duration-200 cursor-pointer" for="website"
                      >Website</label
                   >
@@ -336,23 +344,30 @@ getPasswordsFromDB()
       </div>
    </Dialog>
 
-   <div class="flex flex-col w-screen">
-      <div v-if="passwordStore.allPasswords.length < 1" class="flex items-center justify-center w-full h-screen">
+   <div class="flex flex-col w-full">
+      <div v-if="passwordStore.allPasswords.length < 1" class="flex items-center justify-center h-screen border">
          <span class="text-3xl font-bold text-gray-500">Password List is empty</span>
       </div>
-      <div v-else>
+      <div v-else class="">
          <div
             class="flex justify-between items-center p-3 mt-2 mx-2 rounded-lg font-medium shadow-sm bg-white smooth dark:text-gray-300 text-gray-800 dark:bg-gray-900"
          >
-            <span>All</span>
+            <div class="flex space-x-4">
+               <MdiIcon
+                  @click="showAndHideContents"
+                  icon="mdiMenu"
+                  class="md:hidden !h-[25px] !w-[23px] text-gray-400 hover:text-primary-400 cursor-pointer"
+               />
+               <span>All</span>
+            </div>
             <Dropdown
                v-model="passwordStore.selectedSort"
                :options="passwordStore.sortOptions"
                optionLabel="name"
-               class="w-full md:w-[14rem]"
+               class="md:w-[14rem]"
             />
          </div>
-         <div class="grid grid-cols-1 gap-2 xl:grid-cols-2 p-2">
+         <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 xl:grid-cols-3 p-2">
             <PHolder password-type="login" v-for="block in passwordStore.allPasswordsBackup">
                <template #title>
                   <!-- title -->

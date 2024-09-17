@@ -30,7 +30,6 @@ export const usePasswordStore = defineStore("password", () => {
    const sendPasswordData = async (pass: object) => {
       const { data } = await useFetch("/api/sendPassword", {
          method: "post",
-
          body: JSON.stringify(pass),
       })
       return console.log(data.value)
@@ -48,7 +47,7 @@ export const usePasswordStore = defineStore("password", () => {
       }
       sortPasswordBlocks()
 
-      sendPasswordData(passwordInfo.value) //this will send the password data to the API
+      sendPasswordData(passwordInfo.value) //this will send the password data to the Backend API
       // This will reset all current amounts
       passwordInfo.value = {
          id: "",
@@ -122,7 +121,10 @@ export const usePasswordStore = defineStore("password", () => {
       for (let i = 0; i < allPasswords.value.length; i++) {
          for (let j = i + 1; j < allPasswords.value.length; j++) {
             if (allPasswords.value[i].id != allPasswords.value[j].id)
-               if (allPasswords.value[i].password.length >= 1 && allPasswords.value[i].password === allPasswords.value[j].password) {
+               if (
+                  allPasswords.value[i].password.length >= 1 &&
+                  allPasswords.value[i].password === allPasswords.value[j].password
+               ) {
                   if (!dups.value.includes(allPasswords.value[i])) dups.value.push(allPasswords.value[i])
                   if (!dups.value.includes(allPasswords.value[j])) dups.value.push(allPasswords.value[j])
                }

@@ -20,6 +20,11 @@ const theme = () => {
       useColorMode().preference = "light"
    }
 }
+const showAndHideContents = () => {
+   globalStore.showMenu = "hidden"
+   globalStore.backgroundContent = "visible"
+}
+
 // this prevent the default modal close behavior when press Escape
 watch(tableInfoModal, () => {
    if (!tableInfoModal.value) {
@@ -249,18 +254,13 @@ const disableEditIcon = (id: string) => {
       }
 }
 const filterPasswordsByTag = (id: string, tagName: string) => {
-   // console.log(passwordStore.allPasswordsBackup)
-   // console.log(passwordStore.allPasswords)
-
    // we need this to know when a tag is selected or deselected. if currentSelectedTag has amount, it means a tag has been selected if it hasn't it means no tag has been selected
    passwordStore.currentSelectedTag = tagName
    // this will do the select and deselect functionally
    currentTagId.value = currentTagId.value === id ? null : id
    // this for will filter all password blocks by given tagName
    for (let i = 0; i < passwordStore.allPasswords.length; i++) {
-      passwordStore.allPasswordsBackup = [
-         ...passwordStore.allPasswords.filter((obj) => obj.tags?.includes(tagName)),
-      ]
+      passwordStore.allPasswordsBackup = [...passwordStore.allPasswords.filter((obj) => obj.tags?.includes(tagName))]
    }
    // if currentTagId is null it means user deselect the tag, therefore all filtered passwords should come back
    if (currentTagId.value == null) {
@@ -268,10 +268,9 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
       passwordStore.currentSelectedTag = null
    }
 }
+console.log(globalStore.showMenu)
 </script>
-<template>
-   <!-- different types of modals -->
-
+<template class="border">
    <!-- tag table -->
    <Sidebar v-model:visible="tableInfoModal" position="full">
       <Tag :button-size="'w-30 m-2 !me-0 !h-7'" :input-size="'w-60 h-9 '" />
@@ -280,7 +279,7 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
          <p class="font-bold text-2xl capitalize">There are no tags to display</p>
       </div>
    </Sidebar>
-   <!-- addTag -->
+   <!-- addTag Section -->
    <Dialog
       v-model:visible="tagSore.tagModal"
       modal
@@ -302,41 +301,40 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
       <div class="flex">
          <NewPassword class="border dark:border-gray-700 rounded-lg p-4" />
          <PasswordGenerator class="border ms-2 dark:border-gray-700 rounded-lg p-4" />
-         <!-- <Divider :layout="'vertical'" class="!mx-1" /> -->
       </div>
    </Dialog>
 
    <!-- Main Menu -->
-   <div class="flex flex-col justify-between darkLight w-full md:w-[17rem] h-screen fixed">
+   <div :class="globalStore.showMenu" class="z-10 md:flex flex-col justify-between darkLight w-full md:w-[17rem]">
       <ScrollPanel class="h-screen">
          <!-- Top section -->
          <!-- Header -->
+         <MdiIcon
+            @click="showAndHideContents"
+            icon="mdiKeyboardBackspace"
+            class="md:hidden !h-[28px] !w-[29px] text-gray-400 hover:text-primary-400 cursor-pointer m-4"
+         />
+         <!-- <MdiIcon @click="" icon="mdiKeyboardBackspace" class="md:hidden flex !h-[56px] !w-[58px] cursor-pointer p-4" /> -->
          <div class="text-center my-2">
-            <span class="text-2xl darkLight"
-               >Password <span class="text-primary-400 font-bold">Manager</span></span
-            >
+            <span class="text-2xl darkLight">Password <span class="text-primary-400 font-bold">Manager</span></span>
          </div>
          <!-- Body -->
          <div class="flex flex-col space-y-4">
             <!-- Tag Search -->
             <div>
-               <span class="px-4 text-primary-500 dark:text-primary-400 font-bold leading-none"
-                  >Password Search</span
-               >
+               <span class="px-4 text-primary-500 dark:text-primary-400 font-bold leading-none">Password Search</span>
                <div class="flex py-2 items-center justify-between px-4 smooth">
-                  <span class="relative">
+                  <span class="relative w-full">
                      <MdiIcon
                         icon="mdiMagnify"
                         class="absolute top-2/4 -mt-[10px] left-2 text-surface-400 dark:text-surface-600 !w-[22px] !h-[22px]"
                      />
-                     <InputText placeholder="Search" class="pl-8 w-[230px]" />
+                     <InputText placeholder="Search" class="pl-8 w-full" />
                   </span>
                   <!-- Options -->
                </div>
                <div v-for="chunk in menu" class="mt-4 px-3 flex flex-col darkLight">
-                  <span class="text-primary-500 dark:text-primary-400 font-bold leading-none">{{
-                     chunk.title
-                  }}</span>
+                  <span class="text-primary-500 dark:text-primary-400 font-bold leading-none">{{ chunk.title }}</span>
                   <div
                      v-for="item in chunk.menus"
                      @click="item.command"
@@ -350,9 +348,7 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
                      </div>
                      <Badge
                         class="!bg-yellow-500 dark:bg-yellow-300"
-                        v-if="
-                           item.name == 'Duplicate Passwords' && passwordStore.duplicatePasswords.length >= 2
-                        "
+                        v-if="item.name == 'Duplicate Passwords' && passwordStore.duplicatePasswords.length >= 2"
                         :value="passwordStore.duplicatePasswords.length"
                      ></Badge>
                   </div>
@@ -442,4 +438,3 @@ const filterPasswordsByTag = (id: string, tagName: string) => {
    @apply bg-primary-400 dark:bg-primary-600 text-white hover:dark:bg-primary-600 hover:bg-primary-400;
 }
 </style>
-import type { menuNamesTypes, menuType } from "~/types/type";

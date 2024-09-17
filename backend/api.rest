@@ -10,8 +10,8 @@ Content-Type: application/json
     "title": "test 1",
     "description": "description 1",
     "startWith": "startWith 1",
-    "password": "1234",
-    "secondPassword": "5678",
+    "password": "",
+    "secondPassword": "2",
     "email": "a@b.com",
     "phone": "09300099938",
     "twoFAPassword": "32432434234634534",
@@ -31,4 +31,3 @@ Content-Type: application/json
     "favorite": true,
     "website": "https://google.com"
 }
-

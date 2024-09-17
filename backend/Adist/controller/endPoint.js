@@ -37,8 +37,8 @@ export default {
     }),
     setData: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // const result = await mongoDb.setToDB("passwords", req.body)
-        // console.log(result)
         let re = yield mongoDb.setToDB(req.body, "passwords", passwordsSchema);
-        res.status(200).json({ success: true, error: false, message: "ok", response: re });
+        res.status(200).json(re);
+        console.log(re);
     }),
 };

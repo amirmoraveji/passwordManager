@@ -9,19 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { model } from "mongoose";
 const getFromDB = (tableName, tableSchema) => __awaiter(void 0, void 0, void 0, function* () {
-    //  return await db.collection(dbName).find().toArray()
     const items = yield model(tableName, tableSchema).find();
     return items;
 });
 const setToDB = (data, tableName, tableSchema) => __awaiter(void 0, void 0, void 0, function* () {
-    // return await db.collection(dbName).insertOne(data)
-    //  console.log("Imported schema:", tableSchema)
     const final = model(tableName, tableSchema);
     try {
         yield final.create(data);
+        return { error: false, message: "data was inserted successfully", response: data };
     }
     catch (error) {
-        return error;
+        return { error: true, message: "data was not inserted to the db", response: error };
     }
 });
 export default {

@@ -15,6 +15,7 @@ const globalStore = useGlobalRefStore()
 
 const passwordStore = usePasswordStore()
 
+// this will watch if inputs has no error, it will remove the error sign
 watch(passwordStore, () => {
    if (passwordStore.passwordInfo.title)
       if (passwordStore.passwordInfo.title.length >= 1) {
@@ -108,8 +109,8 @@ const addPassword = () => {
       }
    }
    passwordStore.addToPasswordLoginList()
-   globalStore.LoginTypeModal = false
-   passwordStore.checkDups()
+   globalStore.LoginTypeModal = false //this will close the modal
+   passwordStore.checkDups() //this will check for duplicate passwords
 }
 </script>
 <template>
@@ -140,21 +141,14 @@ const addPassword = () => {
                <MdiIcon icon="mdiAccount" viewBox="0 0 23 23" class="!w-[22px] !h-[20px] me-1" />
                <label>Username</label>
             </div>
-            <InputText
-               :invalid="inputErrors.username"
-               v-model="passwordStore.passwordInfo.username"
-               class=""
-            />
+            <InputText :invalid="inputErrors.username" v-model="passwordStore.passwordInfo.username" class="" />
          </div>
          <!-- Custom Password -->
          <div class="flex flex-col">
             <div class="flex justify-between items-center">
                <div class="flex items-center">
                   <MdiIcon icon="mdiLock" viewBox="0 0 23 23" class="!w-[22px] !h-[20px] me-1" />
-                  <label
-                     class="hover:text-primary-400 transition-colors duration-200 cursor-pointer"
-                     for="cusPassword"
-                  >
+                  <label class="hover:text-primary-400 transition-colors duration-200 cursor-pointer" for="cusPassword">
                      Custom Password
                   </label>
                </div>
@@ -206,15 +200,8 @@ const addPassword = () => {
          <div class="flex flex-col">
             <div class="flex justify-between items-center">
                <div class="flex items-center">
-                  <MdiIcon
-                     icon="mdiTwoFactorAuthentication"
-                     viewBox="0 0 23 23"
-                     class="!w-[22px] !h-[20px] me-1"
-                  />
-                  <label
-                     class="hover:text-primary-400 transition-colors duration-200 cursor-pointer"
-                     for="2FAPassword"
-                  >
+                  <MdiIcon icon="mdiTwoFactorAuthentication" viewBox="0 0 23 23" class="!w-[22px] !h-[20px] me-1" />
+                  <label class="hover:text-primary-400 transition-colors duration-200 cursor-pointer" for="2FAPassword">
                      2FA Secret
                   </label>
                </div>
@@ -239,20 +226,11 @@ const addPassword = () => {
             <div class="flex justify-between items-end">
                <div class="flex items-center">
                   <MdiIcon icon="mdiPhone" viewBox="0 0 23 23" class="!w-[22px] !h-[20px] me-1" />
-                  <label
-                     class="hover:text-primary-400 transition-colors duration-200 cursor-pointer"
-                     for="phone"
-                  >
+                  <label class="hover:text-primary-400 transition-colors duration-200 cursor-pointer" for="phone">
                      Phone
                   </label>
                </div>
-               <Checkbox
-                  class="ms-2"
-                  @click="checkPhone"
-                  inputId="phone"
-                  v-model="checkStates.phone"
-                  :binary="true"
-               />
+               <Checkbox class="ms-2" @click="checkPhone" inputId="phone" v-model="checkStates.phone" :binary="true" />
             </div>
             <InputText
                class="w-full"
@@ -267,20 +245,11 @@ const addPassword = () => {
             <div class="flex justify-between items-center">
                <div class="flex items-center">
                   <MdiIcon icon="mdiEmail" viewBox="0 0 23 23" class="!w-[22px] !h-[20px] me-1" />
-                  <label
-                     class="hover:text-primary-400 transition-colors duration-200 cursor-pointer"
-                     for="email"
-                  >
+                  <label class="hover:text-primary-400 transition-colors duration-200 cursor-pointer" for="email">
                      Email
                   </label>
                </div>
-               <Checkbox
-                  class="ms-2"
-                  @click="checkEmail"
-                  inputId="email"
-                  v-model="checkStates.email"
-                  :binary="true"
-               />
+               <Checkbox class="ms-2" @click="checkEmail" inputId="email" v-model="checkStates.email" :binary="true" />
             </div>
             <InputText
                class="w-full"
@@ -311,10 +280,7 @@ const addPassword = () => {
             <div class="flex justify-between items-center">
                <div class="flex items-center">
                   <MdiIcon icon="mdiWeb" viewBox="0 0 23 23" class="!w-[22px] !h-[20px] me-1" />
-                  <label
-                     class="hover:text-primary-400 transition-colors duration-200 cursor-pointer"
-                     for="website"
-                  >
+                  <label class="hover:text-primary-400 transition-colors duration-200 cursor-pointer" for="website">
                      Website
                   </label>
                </div>

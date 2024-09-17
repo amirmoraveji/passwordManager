@@ -28,7 +28,7 @@ services:
     ports:
       - "3306:3306"
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin:latest
     restart: unless-stopped
     ports:
       - "8080:80"

@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const passwordsSchema = new Schema({
     id: { type: String, required: true },
     title: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String },
     startWith: { type: String },
     password: { type: String, required: true },
     secondPassword: { type: String },
@@ -24,7 +24,7 @@ const passwordsSchema = new Schema({
         },
     ],
     favorite: { type: Boolean, required: true },
-    website: { type: String, required: true },
+    website: { type: String },
 }, { strict: true } //strict true will not save any data that is not defined in the schema
 );
 export default passwordsSchema;
