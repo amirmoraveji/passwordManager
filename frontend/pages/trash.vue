@@ -122,7 +122,7 @@ const removePermanently = (id: string) => {
                         </div>
                         <div>
                            <MdiIcon viewBox="0 0 25 25" icon="mdiKeyChange" class="custom-style" />
-                           <span class="font-bold">second password</span>
+                           <span class="font-bold">second password 2</span>
                         </div>
                         <div>
                            <MdiIcon viewBox="0 0 25 25" icon="mdiEmail" class="custom-style" />
