@@ -1,17 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import path from "path"
+import path from 'path'
 export default defineNuxtConfig({
-   devtools: { enabled: false },
+   devtools: { enabled: true },
    postcss: {
       plugins: {
          tailwindcss: {},
          autoprefixer: {},
       },
    },
-   css: ["~/assets/css/main.css"],
-   modules: ["nuxt-primevue", "@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@pinia/nuxt", "nuxt-mdi"],
+   css: ['~/assets/css/main.css'],
+   modules: ['nuxt-primevue', '@nuxtjs/tailwindcss', '@nuxtjs/color-mode', '@pinia/nuxt', 'nuxt-mdi'],
    colorMode: {
-      classSuffix: "",
+      classSuffix: '',
    },
    primevue: {
       unstyled: true,
