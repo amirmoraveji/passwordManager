@@ -15,7 +15,7 @@ export default defineNuxtConfig({
    },
    primevue: {
       unstyled: true,
-      importPT: { from: path.resolve(__dirname, "./presets/wind/") }, //import and apply preset
+      importPT: { from: path.resolve(__dirname, './presets/wind/') }, //import and apply preset
    },
    // css: ["primevue/resources/themes/aura-light-green/theme.css"],
 })
